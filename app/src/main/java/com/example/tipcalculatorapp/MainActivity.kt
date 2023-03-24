@@ -1,3 +1,5 @@
+//Created by İbrahim Duman on 24.03.2023.
+
 package com.example.tipcalculatorapp
 
 import android.annotation.SuppressLint
