@@ -1,4 +1,3 @@
-//Created by İbrahim Duman on 24.03.2023.
 
 package com.example.tipcalculatorapp
 
@@ -19,9 +18,13 @@ class MainActivity : AppCompatActivity() {
         }
     }
     @SuppressLint("StringFormatInvalid")
-    fun calculateButton(){
+    private fun calculateButton(){
         val stringInTextField = binding.cost.text.toString()
-        val cost = stringInTextField.toDouble()
+        val cost = stringInTextField.toDoubleOrNull()
+        if(cost == null || cost == 0.0){
+            displayTip(0.0)
+            return
+        }
         val selectedId = binding.tipOptions.checkedRadioButtonId
 
         val tipPercentage = when(selectedId){
@@ -34,9 +37,11 @@ class MainActivity : AppCompatActivity() {
         if(binding.roundUpSwitch.isChecked){
             tip = kotlin.math.ceil(tip)
         }
+        displayTip(tip)
+    }
+    private fun displayTip(tip : Double){
         val formattedTip = NumberFormat.getCurrencyInstance().format(tip)
         binding.tipAmount.text = getString(R.string.tip_amount, formattedTip)
-
     }
 
 
